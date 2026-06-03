@@ -1,0 +1,440 @@
+<!-- Colle ce fichier complet comme index.html -->
+<!-- Les fichiers SRT doivent être nommés :
+chanson-eleve.srt
+chanson-prof.srt
+chanson-systeme.srt
+-->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projet MELEC — PRISMElec</title>
+
+<style>
+:root{
+  --bg:#050507;
+  --panel:rgba(10,10,14,.72);
+  --text:#f4f4f4;
+  --muted:#c7c7c7;
+  --accent:#d8b46a;
+  --shadow:rgba(0,0,0,.55);
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial, Helvetica, sans-serif;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(120deg, rgba(0,0,0,.72), rgba(0,0,0,.34), rgba(0,0,0,.78)),
+    url("pochette-melec.png") center/cover no-repeat;
+  filter:blur(18px) brightness(.55);
+  transform:scale(1.08);
+  z-index:-2;
+}
+
+.screen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+}
+
+.card{
+  width:min(980px,100%);
+  background:var(--panel);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:28px;
+  box-shadow:0 28px 80px var(--shadow);
+  backdrop-filter:blur(10px);
+  overflow:hidden;
+}
+
+.home,.player{
+  display:grid;
+  grid-template-columns:1fr 1.05fr;
+}
+
+.cover-wrap{
+  padding:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.25);
+}
+
+.cover{
+  width:100%;
+  max-width:420px;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:50%;
+  box-shadow:0 20px 55px rgba(0,0,0,.55);
+  border:1px solid rgba(255,255,255,.18);
+}
+
+.cover.playing{
+  animation:spinDisc 6s linear infinite;
+}
+
+@keyframes spinDisc{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+.content{
+  padding:34px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:16px;
+}
+
+.label{
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:.78rem;
+  font-weight:700;
+}
+
+h1,h2{
+  margin:0;
+  font-size:clamp(2rem,5vw,4.2rem);
+  line-height:.95;
+}
+
+.prismelec{
+  font-weight:900;
+  letter-spacing:.03em;
+  position:relative;
+  display:inline-block;
+  overflow:hidden;
+  background:linear-gradient(90deg,#2f8cff 0%,#5fa8ff 30%,#fff 48%,#ffe066 52%,#ffd21f 75%,#e6b800 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.prismelec::after{
+  content:"PRISMElec";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(110deg,transparent 0%,transparent 42%,rgba(255,255,255,.75) 50%,transparent 58%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:prismLight 5s ease-in-out infinite;
+}
+
+@keyframes prismLight{
+  0%{transform:translateX(-120%);opacity:0}
+  45%{opacity:1}
+  100%{transform:translateX(120%);opacity:0}
+}
+
+p{
+  margin:0;
+  color:var(--muted);
+  font-size:1.05rem;
+  line-height:1.5;
+}
+
+.buttons{
+  display:grid;
+  gap:14px;
+  margin-top:12px;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+  border-radius:18px;
+  padding:17px;
+  font-size:1.12rem;
+  font-weight:800;
+  color:#fff;
+  background:linear-gradient(135deg,rgba(216,180,106,.95),rgba(138,164,255,.82));
+}
+
+button.secondary{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.18);
+  margin-top:12px;
+}
+
+.player-screen{
+  display:none;
+}
+
+audio{
+  width:100%;
+  margin-top:8px;
+}
+
+.lyrics-box{
+  margin-top:12px;
+  min-height:155px;
+  max-height:185px;
+  overflow:hidden;
+  padding:18px;
+  border-radius:18px;
+  background:rgba(0,0,0,.34);
+  border:1px solid rgba(255,255,255,.12);
+  color:#f2f2f2;
+  font-size:1.05rem;
+  line-height:1.55;
+  white-space:pre-line;
+  text-align:left;
+}
+
+.lyrics-box.show{
+  animation:lyricsRise .55s ease both;
+}
+
+@keyframes lyricsRise{
+  from{opacity:0; transform:translateY(24px)}
+  to{opacity:1; transform:translateY(0)}
+}
+
+.small{
+  color:rgba(255,255,255,.65);
+  font-size:.9rem;
+}
+
+@media (max-width:820px){
+  .home,.player{
+    grid-template-columns:1fr;
+  }
+
+  .screen{
+    padding:14px;
+    align-items:flex-start;
+  }
+
+  .card{
+    border-radius:22px;
+  }
+
+  .cover-wrap{
+    padding:20px 20px 0;
+  }
+
+  .cover{
+    max-width:260px;
+  }
+
+  .content{
+    padding:24px;
+    text-align:center;
+    gap:14px;
+  }
+
+  .lyrics-box{
+    min-height:170px;
+    max-height:210px;
+    font-size:1rem;
+    text-align:left;
+  }
+
+  audio{
+    margin-top:4px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main id="homeScreen" class="screen">
+  <section class="card home">
+    <div class="cover-wrap">
+      <img class="cover" src="pochette-melec.png" alt="Pochette PRISMElec">
+    </div>
+
+    <div class="content">
+      <div class="label">Projet MELEC</div>
+      <h1 class="prismelec">PRISMElec</h1>
+      <p>Trois chansons racontent la même situation, vue par trois facettes : l’élève, le professeur et le système.</p>
+
+      <div class="buttons">
+        <button onclick="openTrack('eleve')">Élève</button>
+        <button onclick="openTrack('prof')">Prof</button>
+        <button onclick="openTrack('systeme')">Système</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<main id="playerScreen" class="screen player-screen">
+  <section class="card player">
+    <div class="cover-wrap">
+      <img id="trackCover" class="cover" src="" alt="">
+    </div>
+
+    <div class="content">
+      <div class="label">Facette du prisme</div>
+      <h2 id="trackTitle"></h2>
+      <p id="trackText"></p>
+
+      <audio id="audioPlayer" controls preload="metadata"></audio>
+
+      <div id="lyricsBox" class="lyrics-box">
+        Les paroles synchronisées apparaîtront ici.
+      </div>
+
+      <p class="small">Les paroles s’affichent par blocs pendant l’écoute.</p>
+      <button class="secondary" onclick="goHome()">← Retour à l’accueil</button>
+    </div>
+  </section>
+</main>
+
+<script>
+const tracks = {
+  eleve: {
+    title: "Élève",
+    text: "La situation vue depuis la logique de l’élève.",
+    audio: "chanson-eleve.mp3",
+    cover: "pochette-eleve.png",
+    srt: "chanson-eleve.srt"
+  },
+  prof: {
+    title: "Prof",
+    text: "La situation vue depuis le terrain, la classe et la parole du professeur.",
+    audio: "chanson-prof.mp3",
+    cover: "pochette-prof.png",
+    srt: "chanson-prof.srt"
+  },
+  systeme: {
+    title: "Système",
+    text: "La situation vue depuis les contraintes, les limites et les mécanismes institutionnels.",
+    audio: "chanson-systeme.mp3",
+    cover: "pochette-systeme.png",
+    srt: "chanson-systeme.srt"
+  }
+};
+
+const homeScreen = document.getElementById("homeScreen");
+const playerScreen = document.getElementById("playerScreen");
+const audioPlayer = document.getElementById("audioPlayer");
+const trackTitle = document.getElementById("trackTitle");
+const trackText = document.getElementById("trackText");
+const trackCover = document.getElementById("trackCover");
+const lyricsBox = document.getElementById("lyricsBox");
+
+let subtitles = [];
+let currentSubtitleIndex = -1;
+
+audioPlayer.onplay = () => trackCover.classList.add("playing");
+audioPlayer.onpause = () => trackCover.classList.remove("playing");
+audioPlayer.onended = () => trackCover.classList.remove("playing");
+
+function openTrack(id){
+  const t = tracks[id];
+  if(!t) return;
+
+  audioPlayer.pause();
+  audioPlayer.src = t.audio;
+  trackCover.src = t.cover;
+  trackCover.alt = "Pochette " + t.title;
+  trackTitle.textContent = t.title;
+  trackText.textContent = t.text;
+
+  lyricsBox.textContent = "Chargement des paroles…";
+  subtitles = [];
+  currentSubtitleIndex = -1;
+
+  fetch(t.srt)
+    .then(response => response.text())
+    .then(data => {
+      subtitles = parseSRT(data);
+      lyricsBox.textContent = "Lecture prête.";
+    })
+    .catch(() => {
+      lyricsBox.textContent = "Paroles non disponibles.";
+    });
+
+  homeScreen.style.display = "none";
+  playerScreen.style.display = "flex";
+
+  setTimeout(() => {
+    audioPlayer.play().catch(() => {});
+  }, 250);
+}
+
+function goHome(){
+  audioPlayer.pause();
+  audioPlayer.currentTime = 0;
+  trackCover.classList.remove("playing");
+  lyricsBox.textContent = "";
+  subtitles = [];
+  currentSubtitleIndex = -1;
+
+  playerScreen.style.display = "none";
+  homeScreen.style.display = "flex";
+}
+
+function parseSRT(data){
+  return data
+    .replace(/\r/g, "")
+    .trim()
+    .split(/\n\s*\n/)
+    .map(block => {
+      const lines = block.split("\n");
+      if(lines.length < 3) return null;
+
+      const timeLine = lines[1];
+      const parts = timeLine.split(" --> ");
+      if(parts.length !== 2) return null;
+
+      return {
+        start: toSeconds(parts[0]),
+        end: toSeconds(parts[1]),
+        text: lines.slice(2).join("\n")
+      };
+    })
+    .filter(Boolean);
+}
+
+function toSeconds(time){
+  const clean = time.trim().replace(",", ".");
+  const parts = clean.split(":");
+  const h = Number(parts[0]);
+  const m = Number(parts[1]);
+  const s = Number(parts[2]);
+  return h * 3600 + m * 60 + s;
+}
+
+audioPlayer.ontimeupdate = () => {
+  const t = audioPlayer.currentTime;
+
+  const index = subtitles.findIndex(sub => t >= sub.start && t <= sub.end);
+
+  if(index !== -1 && index !== currentSubtitleIndex){
+    currentSubtitleIndex = index;
+    lyricsBox.classList.remove("show");
+    void lyricsBox.offsetWidth;
+    lyricsBox.textContent = subtitles[index].text;
+    lyricsBox.classList.add("show");
+  }
+
+  if(index === -1 && currentSubtitleIndex !== -1){
+    currentSubtitleIndex = -1;
+    lyricsBox.textContent = "";
+  }
+};
+</script>
+
+</body>
+</html>

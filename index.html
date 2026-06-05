@@ -1,1 +1,457 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Paroles de voie pro</title><link rel="stylesheet" href="css/style.css"></head><body><main class="hero wrap"><section class="title"><div class="badge">Projet pédagogique MELEC</div><h1>PAROLES<br>DE VOIE PRO</h1><p>De l'invisible au visible</p></section><section class="cards"><a class="entry" href="angle-mort/"><img src="images/angle-mort-presentation.png" alt="Présentation Angle Mort"><div class="entry-text"><h2>ANGLE MORT</h2><p>Le jeu</p></div></a><a class="entry" href="support/"><img src="images/prismelec-presentation.png" alt="Présentation PRISMElec"><div class="entry-text"><h2>PRISMElec</h2><p>Support pédagogique</p></div></a></section></main><footer class="footer">Paroles de voie pro — présentation ordinateur / vidéoprojecteur</footer></body></html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paroles de Voie Pro</title>
+
+  <style>
+    :root {
+      --bg1: #10172a;
+      --bg2: #1e3a5f;
+      --card: rgba(255, 255, 255, 0.96);
+      --text: #102033;
+      --muted: #5b6675;
+      --blue: #2563eb;
+      --green: #16a34a;
+      --shadow: rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.18), transparent 32%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: white;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 12px;
+      background: rgba(9, 18, 35, 0.82);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+    }
+
+    .top-nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .top-nav a:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-2px);
+    }
+
+    .page {
+      width: min(1180px, 94%);
+      margin: 0 auto;
+      padding: 30px 0 28px;
+      text-align: center;
+    }
+
+    .logo {
+      width: min(220px, 55vw);
+      margin: 0 auto 12px;
+      display: block;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.35));
+    }
+
+    .label {
+      display: inline-block;
+      margin: 8px 0 12px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 6px 0 10px;
+      font-size: clamp(2.2rem, 6vw, 4.8rem);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    }
+
+    .tagline {
+      max-width: 850px;
+      margin: 0 auto 28px;
+      font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    .why {
+      margin: 28px auto 34px;
+      padding: 26px;
+      max-width: 930px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.15);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.25);
+      backdrop-filter: blur(8px);
+    }
+
+    .why h2 {
+      margin: 0 0 14px;
+      font-size: 2rem;
+    }
+
+    .why p {
+      margin: 10px auto;
+      max-width: 780px;
+      font-size: 1.12rem;
+      line-height: 1.5;
+    }
+
+    .section-title {
+      margin: 10px 0 24px;
+      font-size: clamp(1.4rem, 3vw, 2.1rem);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-shadow: 0 6px 16px rgba(0,0,0,0.28);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+      gap: 30px;
+      align-items: stretch;
+      margin-top: 18px;
+    }
+
+    .entry-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+      border-radius: 24px;
+      background: var(--card);
+      color: var(--text);
+      text-decoration: none;
+      box-shadow:
+        0 18px 35px var(--shadow),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      transform: translateY(0) scale(1);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, outline 0.25s ease;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .entry-card:hover {
+      transform: translateY(-9px) scale(1.03);
+      box-shadow:
+        0 28px 55px rgba(0,0,0,0.38),
+        0 0 0 4px rgba(255,255,255,0.16);
+    }
+
+    .entry-card.blue:hover {
+      outline: 3px solid rgba(37, 99, 235, 0.55);
+    }
+
+    .entry-card.green:hover {
+      outline: 3px solid rgba(22, 163, 74, 0.55);
+    }
+
+    .entry-card::after {
+      content: "➜";
+      position: absolute;
+      right: 20px;
+      bottom: 18px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 1.35rem;
+      font-weight: bold;
+      opacity: 0.92;
+      transition: transform 0.25s ease;
+    }
+
+    .entry-card.blue::after {
+      background: var(--blue);
+    }
+
+    .entry-card.green::after {
+      background: var(--green);
+    }
+
+    .entry-card:hover::after {
+      transform: translateX(4px);
+    }
+
+    .entry-card h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+    }
+
+    .entry-card h3 {
+      margin: 8px 0 16px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .thumb-wrap {
+      width: 100%;
+      max-width: 430px;
+      margin: 6px auto 18px;
+      padding: 10px;
+      border-radius: 20px;
+      background: linear-gradient(145deg, #ffffff, #dbe5f3);
+      box-shadow:
+        0 14px 24px rgba(0,0,0,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .thumb {
+      width: 100%;
+      display: block;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+    }
+
+    .entry-card p {
+      margin: 0 auto 20px;
+      max-width: 460px;
+      font-size: 1.05rem;
+      line-height: 1.45;
+      color: #25364a;
+    }
+
+    .button {
+      margin-top: auto;
+      padding: 13px 22px;
+      border-radius: 999px;
+      color: white;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.24);
+    }
+
+    .button.blue {
+      background: var(--blue);
+    }
+
+    .button.green {
+      background: var(--green);
+    }
+
+    footer {
+      margin-top: 36px;
+      padding: 18px 10px 6px;
+      color: rgba(255,255,255,0.86);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 99;
+      inset: 0;
+      background: rgba(0,0,0,0.62);
+      padding: 20px;
+    }
+
+    .modal:target {
+      display: grid;
+      place-items: center;
+    }
+
+    .modal-box {
+      width: min(760px, 94vw);
+      max-height: 86vh;
+      overflow: auto;
+      background: white;
+      color: #102033;
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.45);
+      text-align: left;
+    }
+
+    .modal-box h2 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .modal-box p {
+      line-height: 1.55;
+      font-size: 1.05rem;
+    }
+
+    .close {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 11px 17px;
+      border-radius: 999px;
+      background: #102033;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 780px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .entry-card {
+        padding: 20px;
+      }
+
+      .top-nav {
+        gap: 7px;
+      }
+
+      .top-nav a {
+        font-size: 0.9rem;
+        padding: 7px 10px;
+      }
+    }
+  </style>
+</head>
+
+<body id="accueil">
+
+  <nav class="top-nav" aria-label="Navigation principale">
+    <a href="#accueil">🏠 Accueil</a>
+    <a href="angle-mort.html">🎲 Angle Mort</a>
+    <a href="prismelec.html">📚 PRISMElec</a>
+    <a href="#pourquoi">❓ Pourquoi</a>
+  </nav>
+
+  <main class="page">
+
+    <!-- Remplacer le chemin si ton logo est dans un autre dossier -->
+    <img class="logo" src="Paroles-voie-pro.png" alt="Logo Paroles de Voie Pro" />
+
+    <div class="label">Projet pédagogique MELEC</div>
+
+    <h1>Paroles de Voie Pro</h1>
+
+    <p class="tagline">
+      Apprendre à voir ce que chacun ne voit pas dans une même situation.
+    </p>
+
+    <section class="why" id="pourquoi">
+      <h2>❓ POURQUOI ?</h2>
+
+      <p>
+        Une même situation peut être vécue, ressentie et interprétée de manière très différente selon les personnes.
+      </p>
+
+      <p>
+        <strong>Paroles de Voie Pro</strong> propose des outils pour apprendre à observer, comprendre et dialoguer avant de juger.
+      </p>
+    </section>
+
+    <h2 class="section-title">Comment découvrir le projet ?</h2>
+
+    <section class="cards">
+
+      <!-- Modifier href si besoin vers la vraie page Angle Mort -->
+      <a class="entry-card blue" href="angle-mort.html">
+        <h2>🎲 ANGLE MORT</h2>
+        <h3>Le jeu pédagogique</h3>
+
+        <!-- Remplacer le nom de l'image si besoin -->
+        <div class="thumb-wrap">
+          <img class="thumb" src="angle-mort.png" alt="Aperçu du jeu Angle Mort" />
+        </div>
+
+        <p>
+          Jouez des situations inspirées du réel et découvrez pourquoi chacun perçoit les choses différemment.
+        </p>
+
+        <span class="button blue">Découvrir le jeu</span>
+      </a>
+
+      <!-- Modifier href si besoin vers la vraie page PRISMElec -->
+      <a class="entry-card green" href="prismelec.html">
+        <h2>📚 PRISMElec</h2>
+        <h3>Les activités pédagogiques</h3>
+
+        <!-- Remplacer le nom de l'image si besoin -->
+        <div class="thumb-wrap">
+          <img class="thumb" src="prismelec.png" alt="Aperçu du projet PRISMElec" />
+        </div>
+
+        <p>
+          Découvrez les activités, les supports, les chansons et les productions réalisés autour des compétences psychosociales.
+        </p>
+
+        <span class="button green">Découvrir ce projet</span>
+      </a>
+
+    </section>
+
+    <footer>
+      © 2026 Frédéric Loye – Paroles de Voie Pro. Tous droits réservés.
+      <br />
+      <a href="#mentions-legales">Mentions légales</a>
+    </footer>
+
+  </main>
+
+  <section class="modal" id="mentions-legales" aria-label="Mentions légales">
+    <div class="modal-box">
+      <h2>Mentions légales</h2>
+
+      <p>
+        Les contenus pédagogiques, textes, chansons, documents, illustrations et ressources présentés sur ce site sont protégés par le droit d'auteur.
+      </p>
+
+      <p>
+        Toute reproduction, diffusion ou utilisation, totale ou partielle, sous quelque forme que ce soit, sans autorisation préalable de l'auteur, est interdite.
+      </p>
+
+      <p>
+        Les projets PRISMElec, Angle Mort et Paroles de Voie Pro constituent des créations originales de Frédéric Loye.
+      </p>
+
+      <p>
+        Pour toute demande d'utilisation, de diffusion ou de partenariat, merci de prendre contact avec l'auteur.
+      </p>
+
+      <a class="close" href="#accueil">Fermer</a>
+    </div>
+  </section>
+
+</body>
+</html>

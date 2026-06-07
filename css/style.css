@@ -659,54 +659,73 @@ audio {
   .logo-pvp {
     width: min(360px, 78vw);
   }
-  .navcard{
+.navcard{
   position:relative;
   overflow:hidden;
   border-radius:16px;
+  padding-left:26px;
+  border:1px solid rgba(255,255,255,.18);
   transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 
 .navcard::before{
   content:"";
   position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:12px;
+  background:var(--nav-color);
+}
+
+.navcard::after{
+  content:"";
+  position:absolute;
   inset:0;
-  opacity:.18;
+  opacity:.20;
   pointer-events:none;
-  background:linear-gradient(135deg, transparent, rgba(255,255,255,.75));
+  background:linear-gradient(135deg, var(--nav-glow), transparent 65%);
 }
 
 .navcard:hover{
   transform:translateY(-4px) scale(1.015);
-  box-shadow:0 18px 36px rgba(0,0,0,.36);
+  box-shadow:0 18px 36px rgba(0,0,0,.42);
+  border-color:var(--nav-color);
 }
 
 .nav-green{
-  border-left:6px solid #22c55e;
-  background:linear-gradient(135deg, rgba(34,197,94,.28), rgba(15,23,42,.92));
+  --nav-color:#22c55e;
+  --nav-glow:rgba(34,197,94,.65);
+  background:linear-gradient(135deg, rgba(34,197,94,.24), rgba(15,23,42,.96));
 }
 
 .nav-blue{
-  border-left:6px solid #38bdf8;
-  background:linear-gradient(135deg, rgba(56,189,248,.30), rgba(15,23,42,.92));
+  --nav-color:#38bdf8;
+  --nav-glow:rgba(56,189,248,.70);
+  background:linear-gradient(135deg, rgba(56,189,248,.26), rgba(15,23,42,.96));
 }
 
 .nav-purple{
-  border-left:6px solid #a855f7;
-  background:linear-gradient(135deg, rgba(168,85,247,.30), rgba(15,23,42,.92));
+  --nav-color:#a855f7;
+  --nav-glow:rgba(168,85,247,.70);
+  background:linear-gradient(135deg, rgba(168,85,247,.26), rgba(15,23,42,.96));
 }
 
 .nav-orange{
-  border-left:6px solid #f97316;
-  background:linear-gradient(135deg, rgba(249,115,22,.32), rgba(15,23,42,.92));
+  --nav-color:#f97316;
+  --nav-glow:rgba(249,115,22,.72);
+  background:linear-gradient(135deg, rgba(249,115,22,.30), rgba(15,23,42,.96));
 }
 
 .nav-cyan{
-  border-left:6px solid #22d3ee;
-  background:linear-gradient(135deg, rgba(34,211,238,.28), rgba(15,23,42,.92));
+  --nav-color:#22d3ee;
+  --nav-glow:rgba(34,211,238,.70);
+  background:linear-gradient(135deg, rgba(34,211,238,.26), rgba(15,23,42,.96));
 }
 
 .nav-red{
-  border-left:6px solid #ef4444;
-  background:linear-gradient(135deg, rgba(239,68,68,.30), rgba(15,23,42,.92));
+  --nav-color:#ef4444;
+  --nav-glow:rgba(239,68,68,.72);
+  background:linear-gradient(135deg, rgba(239,68,68,.30), rgba(15,23,42,.96));
 }
 }

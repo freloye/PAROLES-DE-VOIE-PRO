@@ -1,1 +1,203 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Nos projets - Paroles de Voie Pro</title>
+  <link rel="stylesheet" href="css/style.css">
 
+  <style>
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Arial,Helvetica,sans-serif;
+      color:white;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,138,0,.18), transparent 25%),
+        radial-gradient(circle at 80% 15%, rgba(37,99,235,.22), transparent 30%),
+        linear-gradient(130deg,#06111f,#102842);
+      overflow-x:hidden;
+    }
+
+    .page{
+      width:min(1500px,96vw);
+      min-height:100vh;
+      margin:0 auto;
+      padding:22px 0 26px;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    header{
+      display:grid;
+      grid-template-columns:260px 1fr 160px;
+      align-items:center;
+      gap:20px;
+    }
+
+    .logo{
+      width:240px;
+      max-width:100%;
+      filter:drop-shadow(0 10px 20px rgba(0,0,0,.45));
+    }
+
+    h1{
+      margin:0;
+      text-align:center;
+      font-size:clamp(2.2rem,5vw,4.6rem);
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      text-shadow:0 10px 24px rgba(0,0,0,.45);
+    }
+
+    .home{
+      justify-self:end;
+      color:white;
+      text-decoration:none;
+      font-weight:900;
+      padding:12px 18px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.28);
+      background:rgba(255,255,255,.10);
+    }
+
+    .projects{
+      flex:1;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .project{
+      display:flex;
+      flex-direction:column;
+      border-radius:18px;
+      overflow:hidden;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.20);
+      box-shadow:0 20px 45px rgba(0,0,0,.35);
+    }
+
+    .project img{
+      width:100%;
+      height:100%;
+      max-height:620px;
+      object-fit:contain;
+      background:#050b14;
+      display:block;
+    }
+
+    .project-footer{
+      padding:16px 22px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      background:rgba(0,0,0,.38);
+    }
+
+    .project-text{
+      font-size:clamp(1rem,1.4vw,1.35rem);
+      line-height:1.35;
+      font-weight:700;
+    }
+
+    .btn{
+      flex-shrink:0;
+      text-decoration:none;
+      color:#07131f;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      padding:14px 22px;
+      border-radius:14px;
+      box-shadow:0 8px 18px rgba(0,0,0,.32);
+      white-space:nowrap;
+    }
+
+    .btn-angle{
+      background:#ffd21a;
+    }
+
+    .btn-prismelec{
+      background:#1e9bff;
+      color:white;
+    }
+
+    footer{
+      text-align:center;
+      font-size:.9rem;
+      color:rgba(255,255,255,.75);
+    }
+
+    @media(max-width:900px){
+      body{overflow:auto}
+
+      header{
+        grid-template-columns:1fr;
+        text-align:center;
+      }
+
+      .logo{
+        margin:0 auto;
+      }
+
+      .home{
+        justify-self:center;
+      }
+
+      .projects{
+        grid-template-columns:1fr;
+      }
+
+      .project-footer{
+        flex-direction:column;
+        text-align:center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <header>
+      <img class="logo" src="images/Paroles-voie-pro.png" alt="Logo Paroles de Voie Pro">
+      <h1>Nos projets</h1>
+      <a class="home" href="index.html">Accueil</a>
+    </header>
+
+    <section class="projects">
+
+      <article class="project">
+        <img src="images/angle-mort-affiche.png" alt="Affiche Angle Mort">
+        <div class="project-footer">
+          <div class="project-text">
+            Ce que je ne vois pas peut influencer toute la situation.
+          </div>
+          <a class="btn btn-angle" href="angle-mort/">Découvrir Angle Mort</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <img src="images/prismelec-affiche.png" alt="Affiche PRISMElec">
+        <div class="project-footer">
+          <div class="project-text">
+            Une situation, plusieurs angles.
+          </div>
+          <a class="btn btn-prismelec" href="support/">Découvrir PRISMElec</a>
+        </div>
+      </article>
+
+    </section>
+
+    <footer>
+      © 2026 Frédéric Loye – Paroles de Voie Pro. Tous droits réservés.
+    </footer>
+
+  </main>
+</body>
+</html>

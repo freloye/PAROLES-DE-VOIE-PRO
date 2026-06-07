@@ -64,15 +64,27 @@
       </div>
     </section>
 
-    <section class="doc locked" id="systeme-locked">
-      <h2>🔒 Chanson Système</h2>
-      <p>Accès protégé. Mot de passe : MELEC.</p>
-      <div class="unlock">
-        <input id="systeme-pass" type="password" placeholder="Mot de passe">
-        <button class="btn primary" onclick="unlock('systeme')">Déverrouiller</button>
-        <span id="systeme-msg"></span>
-      </div>
-    </section>
+ <section class="audio-stage locked" id="systeme-locked" data-player="systeme-locked">
+  <div class="turntable">
+    <img class="vinyl-cover" src="../images/pochette-systeme.png" alt="Chanson Système verrouillée">
+    <div class="vinyl-core"></div>
+  </div>
+
+  <div class="karaoke-panel">
+    <h2>🔒 Chanson Système</h2>
+    <p class="status">Accès réservé.</p>
+
+    <div class="lyrics-now">
+      Cette lecture est protégée.
+    </div>
+
+    <div class="actions unlock">
+      <input id="systeme-pass" type="password" placeholder="Mot de passe">
+      <button class="btn primary" onclick="unlock('systeme')">Déverrouiller</button>
+      <span id="systeme-msg"></span>
+    </div>
+  </div>
+</section>
 
     <div id="systeme-content" class="hidden">
       <section class="audio-stage" data-player="systeme">

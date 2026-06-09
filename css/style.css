@@ -729,3 +729,20 @@ audio {
   background:linear-gradient(135deg, rgba(239,68,68,.30), rgba(15,23,42,.96));
 }
 }
+/* Correction page projets */
+.projects{
+  align-items:start !important;
+}
+
+.project{
+  height:auto !important;
+  min-height:0 !important;
+  align-self:start !important;
+}
+
+.project img{
+  width:100% !important;
+  height:auto !important;
+  object-fit:contain !important;
+  display:block !important;
+}
